@@ -104,6 +104,10 @@ def main():
                     config.update(
                         config.monitor_size[0], config.monitor_size[1])
                     display_cfg.toggle_full_screen()
+                if event.key == pygame.K_ESCAPE:
+                    controls.returnControlPage()
+
+
 
             # Mouse click events
             if event.type == pygame.MOUSEBUTTONDOWN:
