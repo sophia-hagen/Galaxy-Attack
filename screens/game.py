@@ -70,7 +70,7 @@ def game(isMouse=False):
                               (config.starting_x + 37 * index - 7, 30))
 
         # Draw Text
-        Assets.text.draw(f'{player.get_level()} / 10', sub_small_font, Colors.CYAN,
+        Assets.text.draw(f'{player.get_level()} / 5', sub_small_font, Colors.CYAN,
                          (config.starting_x + 33, 75))
 
         score = player.get_score()
@@ -101,17 +101,33 @@ def game(isMouse=False):
 
         if win:
             scores.append(True, player.get_level(), player.get_score(), player.get_kills())
-            Assets.text.draw('WINNER :)', pop_up_font, Colors.GREEN,
+            Assets.text.draw('HTL-Abschluss :)', pop_up_font, Colors.GREEN,
                              (config.center_x, 350), True)
 
         if lost:
             scores.append(False, player.get_level(), player.get_score(), player.get_kills())
             Sound.GAME_OVER_SOUND.play()
-            Assets.text.draw('GAME OVER :(', pop_up_font, Colors.RED,
+            Assets.text.draw('Leider Sitzengeblieben :(', pop_up_font, Colors.RED,
                              (config.center_x, 350), True)
 
-        if player.get_level() >= 10 and boss_entry:
-            Assets.text.draw('BOSS LEVEL!!', pop_up_font, Colors.RED,
+        if player.get_level() >= 5 and boss_entry:
+            Assets.text.draw('Maturajahr!!', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
+        
+        if player.get_level() == 4:
+            Assets.text.draw('4. Klasse', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
+        
+        if player.get_level() == 3:
+            Assets.text.draw('3. Klasse', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
+            
+        if player.get_level() == 2:
+            Assets.text.draw('2. Klasse', pop_up_font, Colors.RED,
+                             (config.center_x, 350), True)
+        
+        if player.get_level() == 1:
+            Assets.text.draw('1. Klasse', pop_up_font, Colors.RED,
                              (config.center_x, 350), True)
 
         # explosion group
@@ -135,11 +151,11 @@ def game(isMouse=False):
             player.run = False
             pygame.mouse.set_visible(True)
 
-        if player.get_level() == 10 and boss_entry:
+        if player.get_level() == 5 and boss_entry:
             redraw_window()
             time.sleep(2)
             boss_entry = False
-        elif player.get_level() > 10:
+        elif player.get_level() > 5:
             win = True
             redraw_window()
             time.sleep(3)
@@ -149,11 +165,11 @@ def game(isMouse=False):
             player.set_level()
             wave_length += 4
 
-            for i in range(wave_length if player.get_level() < 10 else 1):
+            for i in range(wave_length if player.get_level() < 5 else 1):
                 enemies.append(Enemy(
                     random.randrange(50, config.WIDTH - 100),
                     random.randrange(-1200, -100),
-                    random.choice(['easy', 'medium', 'hard']) if player.get_level() < 10 else 'boss')
+                    random.choice(['easy', 'medium', 'hard']) if player.get_level() < 5 else 'boss')
                 )
 
         for event in pygame.event.get():
